@@ -22,12 +22,16 @@ export default class ProductList {
 
 	async init() {
 		const list = await this.dataSource.getData();
-		this.renderList(list);
-	 }
+		// Filtra productos con imagen válida (y opcionalmente verifica que la imagen exista)
+		const filteredList = list.filter(product => product.Image && product.Image !== "");
+		// Solo los primeros 4 productos
+		const topProducts = filteredList.slice(0, 4);
+		this.renderList(topProducts);
+	}
 
 	renderList(list) {
-		const htmlStrings = list.map(productCardTemplate);
-		this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
+		// const htmlStrings = list.map(productCardTemplate);
+		// this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
 
 		// apply use new utility function instead of the commented code above
 		renderListWithTemplate(productCardTemplate, this.listElement, list);
