@@ -37,3 +37,40 @@ export function renderListWithTemplate(template, parentElement, list, position =
 	}
 	parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+	// Limpia el contenido del elemento padre antes de insertar
+	parentElement.innerHTML = "";
+	// Genera el HTML usando el template y los datos
+	const htmlString = template(data);
+	// Inserta el HTML en el elemento padre
+	parentElement.insertAdjacentHTML("beforeend", htmlString);
+	// Si hay callback, lo ejecuta con el nuevo elemento insertado
+	if (callback) {
+		callback(parentElement.firstElementChild);
+	}
+
+}
+
+export async function loadTemplate(path) {
+	const response = await fetch(path);
+	if (!response.ok) {
+		throw new Error(`The template could not be loaded: ${path}`);
+	}
+	const html = await response.text();
+	return html;
+}
+
+export async function loadHeaderFooter() {
+	// Carga los templates de header y footer
+	const headerHtml = await loadTemplate("/partials/header.html");
+	const footerHtml = await loadTemplate("/partials/footer.html");
+
+	// Obtiene los elementos placeholder del DOM
+	const headerElement = document.getElementById("main-header");
+	const footerElement = document.getElementById("main-footer");
+
+	// Renderiza el header y footer usando renderWithTemplate
+	renderWithTemplate(data => headerHtml, headerElement, null);
+	renderWithTemplate(data => footerHtml, footerElement, null);
+}
