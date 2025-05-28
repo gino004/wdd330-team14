@@ -1,11 +1,3 @@
-import Alert from "./alert.mjs";
-
-const alertInstance = new Alert("/json/alerts.json");
-alertInstance.render();
-
-
-
-
 function showWelcomeModal() {
     const modalShown = localStorage.getItem("welcome-modal-shown");
   
