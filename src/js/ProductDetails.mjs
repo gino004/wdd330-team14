@@ -28,6 +28,16 @@ export default class ProductDetails {
 	}
 
 	renderProductDetails() {
-		productDetailsTemplate(this.product);
+		const container = document.querySelector(".product-detail").innerHTML = productDetailsTemplate(this.product);
+		container.innerHTML = productDetailsTemplate(this.product);
 	}
+}
+
+function productDetailsTemplate(product) {
+	return `
+			<img src="${product.PrimaryLarge}" alt="${product.Name}">
+			<h2>${product.Name}</h2>
+			<p>${product.Description}</p>
+			<button id="addToCart">Add to Cart</button>
+	`;
 }
