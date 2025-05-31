@@ -288,3 +288,27 @@ footer {
  font-size: 1.1rem;
  text-align: center;
 }
+
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+ .categories {
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+ }
+
+ .category img {
+  width: 60px;
+  height: 60px;
+ }
+
+ main.divider {
+  padding: 0 1rem;
+ }
+
+ .product-card {
+  width: 100%;
+  margin-bottom: 1rem;
+ }
+}
