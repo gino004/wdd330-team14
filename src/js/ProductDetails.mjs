@@ -21,13 +21,10 @@ export default class ProductDetails {
 	}
 
 	addProductToCart() {
-		let cartItems = getLocalStorage("so-cart");
-		if (!Array.isArray(cartItems)){
-			cartItems = [];
-		}
+		const cartItems = getLocalStorage("so-cart") || [];
 		cartItems.push(this.product);
 		setLocalStorage("so-cart", cartItems);
-	}
+	  }
 
 	renderProductDetails() {
 		productDetailsTemplate(this.product);
