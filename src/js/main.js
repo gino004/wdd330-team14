@@ -9,7 +9,7 @@ const dataSource = new ProductData("tents");
 
 const element = document.querySelector(".product-list");
 
-const productList = new ProductList ("Tents", dataSource, element);
+const productList = new ProductList("Tents", dataSource, element);
 
 const alertInstance = new Alert("/json/alerts.json");
 
@@ -31,6 +31,5 @@ function showWelcomeModal() {
 
 // Call this when the page loads
 document.addEventListener("DOMContentLoaded", showWelcomeModal);
-
 
 productList.init();
