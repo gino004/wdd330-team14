@@ -11,6 +11,7 @@ export default class ProductDetails {
 	async init() {
 		// use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
 		this.product = await this.dataSource.findProductById(this.productId);
+		console.log(this.product);
 		// the product details are needed before rendering the HTML
 		this.renderProductDetails();
 		// once the HTML is rendered, add a listener to the Add to Cart button
@@ -20,15 +21,35 @@ export default class ProductDetails {
 			.addEventListener("click", this.addProductToCart.bind(this));
 	}
 
-	addProductToCart() {
+	//addProductToCart() {
+		//const cartItems = getLocalStorage("so-cart") || [];
+		//cartItems.push(this.product);
+		//setLocalStorage("so-cart", cartItems);
+	  //}
+	  addProductToCart() {
 		const cartItems = getLocalStorage("so-cart") || [];
-		cartItems.push(this.product);
+		const existingItem = cartItems.find(item => item.Id === this.product.Id);
+	  
+		if (existingItem) {
+		  existingItem.qty = (existingItem.qty || 1) + 1;
+		} else {
+			const productToAdd = { ...this.product, qty: 1 };
+			cartItems.push(productToAdd);
+		}
+	  
 		setLocalStorage("so-cart", cartItems);
 	  }
+	
+	  
 
 	renderProductDetails() {
+		if (!this.product) {
+		  console.error("Product not found.");
+		  document.querySelector("main").innerHTML = "<p>Product not found.</p>";
+		  return;
+		}
 		productDetailsTemplate(this.product);
-	}
+	  }
 }
 function productDetailsTemplate(product) {
 	document.querySelector("h2").textContent = product.Brand.Name;
