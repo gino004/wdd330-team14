@@ -1,7 +1,9 @@
 import Alert from "./alert.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
+loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
 
@@ -10,6 +12,7 @@ const element = document.querySelector(".product-list");
 const productList = new ProductList ("Tents", dataSource, element);
 
 const alertInstance = new Alert("/json/alerts.json");
+
 alertInstance.render();
 
 function showWelcomeModal() {
@@ -28,5 +31,6 @@ function showWelcomeModal() {
 
 // Call this when the page loads
 document.addEventListener("DOMContentLoaded", showWelcomeModal);
+
 
 productList.init();
