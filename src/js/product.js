@@ -1,6 +1,8 @@
-import { getParam } from "./utils.mjs"; // getLocalStorage, setLocalStorage removed
+import { getParam, loadHeaderFooter } from "./utils.mjs"; // getLocalStorage, setLocalStorage removed
 import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
+
+loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
 const productID = getParam("products"); //new URLSearchParams(window.location.search).get("product");//getParam("product");
