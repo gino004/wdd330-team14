@@ -1,5 +1,7 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
+
+
 function cartItemTemplate(item) {
   return `
     <li class="cart-card divider">
